@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gufang.mapper.StudMapper">
+	<select id="findAll" parameterType="int" resultType="com.gufang.bean.Student">
+		select a.*,b.hobby,b.chkid from t_student a left join (select group_concat(h.name) as hobby,
+			group_concat(h.id) as chkid,sid from t_s2h s2h,t_hobby h where s2h.hid=h.id group by s2h.sid) b 
+			on a.id=b.sid limit #{starts},#{rows}
+	</select>
+	<select id="findCount" resultType="Integer">
+		select count(*) as cn from t_student
+	</select>
+	<select id="query" parameterType="String" resultType="com.gufang.bean.Student">
+		<!-- 
+		select id,no,name,dt,(select group_concat(h.name) as hobby from student_hobby h,student2hobby s2h where h.id=s2h.hid and s2h.sid=s.id) as hobby,(select group_concat(h.id) as chkid from student_hobby h,student2hobby s2h where h.id=s2h.hid and s2h.sid=s.id) as chkid from student s;
+		 -->
+		select * from t_student where no like '%${no}%'
+	</select>
+	<select id="findHobby" parameterType="com.gufang.bean.HobbyInfo" resultType="com.gufang.bean.HobbyInfo">
+		select id as hid,name as hname from t_hobby
+	</select>
+	<insert id="saveStudent" parameterType="com.gufang.bean.Student">
+		insert into t_student (id,no,name,dt) values('${id}',#{no},'${name}','${dt}')
+	</insert>
+	<insert id="saveStudentHobby" parameterType="com.gufang.bean.Student2HobbyInfo">
+		insert into t_s2h (id,sid,hid) values('${id}','${sid}','${hid}')
+	</insert>
+	<delete id="delStudent" parameterType="String">
+		delete from t_student where id=#{id}
+	</delete>
+	<update id="updateStudent" parameterType="com.gufang.bean.Student">
+		update t_student set no=${no},name='${name}',dt='${dt}' where id ='${id}'
+	</update>
+	<delete id="delStudentHobby" parameterType="String">
+		delete from t_s2h where sid=#{sid}
+	</delete>
+	<select id="findOrg" resultType="com.gufang.bean.OrgInfo">
+		<if test="id==null">
+			select * from test_org where parentid is null
+		</if>
+		<if test="id!=null">
+			select * from test_org where parentid=#{id}
+		</if>
+	</select>
+</mapper>
