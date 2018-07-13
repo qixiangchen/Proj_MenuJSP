@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.BookMapper">
+	<select id="findAdminBook" resultType="com.test.bean.BookInfo">
+		<if test="typeId==''">
+			select b.*,(select count(*) from t_bookuser bu where bu.bid=b.id) as count 
+				from t_book b where b.name like '%${name}%'
+		</if>
+		<if test="typeId!=''">
+			select b.*,(select count(*) from t_bookuser bu where bu.bid=b.id) as count 
+				from t_book b where b.name like '%${name}%' and typeid in (${typeId})
+		</if>
+	</select>
+	<select id="findUserBook" resultType="com.test.bean.BookInfo">
+		select b.*,bu.loginId as isSelected from t_book b left join 
+		(select bid,loginid from t_bookuser where loginid=#{loginId}) bu 
+		on b.id=bu.bid;
+	</select>
+	<insert id="saveAdminBook" parameterType="com.test.bean.BookInfo">
+		insert into t_book (name,author,typeId) values(#{name},#{author},#{typeId})
+	</insert>
+	<update id="updateAdminBook" parameterType="com.test.bean.BookInfo">
+		update t_book set name=#{name},author=#{author},typeId=#{typeId} where id=#{id}
+	</update>
+	<delete id="deleteBook" parameterType="Integer">
+		delete from t_book where id=#{id}
+	</delete>
+	<delete id="deleteUserBook" parameterType="Integer">
+		delete from t_bookuser where bid=#{id}
+	</delete>
+	<insert id="saveUserBook" parameterType="com.test.bean.BookUser">
+		insert into t_bookuser (bid,loginid) values(#{bookId},#{loginId})
+	</insert>
+</mapper>

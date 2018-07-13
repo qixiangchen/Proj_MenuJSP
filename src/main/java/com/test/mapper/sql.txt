@@ -1,0 +1,24 @@
+create table t_book(id int auto_increment primary key,
+	name varchar(40),author varchar(40),typeid int);
+
+create table t_booktype(id int auto_increment primary key,
+	name varchar(40));
+	
+create table t_bookuser(bid int,loginid varchar(40));
+
+insert into t_booktype(name) values('科技');
+insert into t_booktype(name) values('哲学');
+insert into t_booktype(name) values('音乐');
+
+insert into t_book(name,author,typeid) values('Java','Sun',1);
+insert into t_book(name,author,typeid) values('Oracle','Oracle',2);
+
+insert into t_bookuser(bid,loginid) values(1,'user1');
+insert into t_bookuser(bid,loginid) values(1,'user2');
+insert into t_bookuser(bid,loginid) values(2,'user3');
+
+select b.*,(select count(*) as cnt from t_bookuser bu where bu.bid=b.id) from t_book b;
+
+
+select b.*,bu.loginId from t_book b left join 
+(select bid,loginid from t_bookuser where loginid='user3') bu on b.id=bu.bid;
