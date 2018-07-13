@@ -1,0 +1,30 @@
+create table t_animal(aid int auto_increment primary key,name varchar(40),
+	weigth int);
+	
+create table t_region(rid int auto_increment primary key,name varchar(40));
+
+create table t_a2r (aid int,rid int);
+
+insert into t_region(name) values ('亚洲');
+insert into t_region(name) values ('非洲');
+insert into t_region(name) values ('美洲');
+
+insert into t_animal(name,weigth) values('狮子',300);
+insert into t_animal(name,weigth) values('大象',2000);
+
+insert into t_a2r(aid,rid) values(1,2);
+insert into t_a2r(aid,rid) values(1,3);
+
+insert into t_a2r(aid,rid) values(2,1);
+insert into t_a2r(aid,rid) values(2,2);
+
+
+select r.name,r.rid,a.aid from t_region r,t_a2r a where r.rid=a.rid
+
+(select group_concat(r.name) rname,group_concat(r.rid) rid,a.aid 
+	from t_region r,t_a2r a where r.rid=a.rid group by a.aid)
+
+select an.*,b.rname,b.rid from t_animal an left join
+	(select group_concat(r.name) rname,group_concat(r.rid) rid,a.aid 
+	from t_region r,t_a2r a where r.rid=a.rid group by a.aid) b
+	on an.aid=b.aid
