@@ -1,0 +1,13 @@
+create table t_blog(id long,name varchar(40),dt date,
+	content varchar(500),typeid long,status int);
+	
+create table t_blogtype(id long,name varchar(40));
+
+insert into t_blogtype(id,name) values(1,'Java');
+insert into t_blogtype(id,name) values(2,'C++');
+insert into t_blogtype(id,name) values(3,'Python');
+
+insert into t_blog(id,name,dt,content,typeid,status)
+	values(1,'我的博客','2018-7-8','博客内容',1,1);
+insert into t_blog(id,name,dt,content,typeid,status)
+	values(2,'我的博客2','2018-7-8','博客内容2',1,1);

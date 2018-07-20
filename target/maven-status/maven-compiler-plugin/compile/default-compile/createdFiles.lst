@@ -1,0 +1,16 @@
+com\test\util\RedisTool.class
+com\test\service\impl\BlogServiceImpl.class
+com\test\util\Starter.class
+com\test\bean\TypeInfo.class
+com\test\util\FreeMarkerUtil.class
+com\test\util\SolrTool.class
+com\test\ctrl\BlogCtrl.class
+com\test\service\impl\TypeServiceImpl.class
+com\test\service\IBlogService.class
+com\test\service\ITypeService.class
+com\test\util\ResultInfo.class
+com\test\bean\BlogInfo.class
+com\test\util\RedisUtil.class
+com\test\mapper\BlogMapper.class
+com\test\util\RedisUtil$1.class
+com\test\mapper\TypeMapper.class

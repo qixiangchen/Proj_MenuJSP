@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>博文</title>
+</head>
+<body>
+	<div style="text-align:center">
+		<#if name??>
+			${name}
+		</#if>
+	</div>
+	<div style="width:100%;text-align:center;background:gray">
+		发布时间:${dt} 分类:${typeName}
+	</div>
+	
+	<h3>
+		${content}
+	</h3>
+	
+</body>
+</html>
