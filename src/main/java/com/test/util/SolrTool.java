@@ -29,6 +29,7 @@ public class SolrTool {
 	
 	public void delete(String id)
 	{
+
 		try
 		{
 			client.deleteById(id.toString());
@@ -205,7 +206,9 @@ public class SolrTool {
 	
 	public static void main(String[] args)
 	{
-		
+		String name = "七匹狼短袖T恤";
+		name = name.replaceAll("短袖", "<font color='red'>短袖</font>");
+		System.out.println(name);
 	}
 	
 }

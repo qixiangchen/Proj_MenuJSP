@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: Proj_Blog Maven Webapp
+Implementation-Title: Proj_JspMenu Maven Webapp
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: java
 Implementation-Vendor-Id: com.test

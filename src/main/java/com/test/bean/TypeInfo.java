@@ -7,15 +7,17 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
-@TableName("t_blogtype")
+@TableName("t_menutype")
 public class TypeInfo implements Serializable{
 	@TableId
-	private Long id = null;
+	private Integer id = null;
 	private String name = null;
-	public Long getId() {
+	@TableField(exist=false)
+	private String checked = "";
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -24,5 +26,10 @@ public class TypeInfo implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public String getChecked() {
+		return checked;
+	}
+	public void setChecked(String checked) {
+		this.checked = checked;
+	}	
 }

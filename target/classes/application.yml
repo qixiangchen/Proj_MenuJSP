@@ -13,7 +13,7 @@ spring:
 #数据源配置      
   datasource:
     name: w1
-    url: jdbc:mysql://127.0.0.1:3306/w2?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/w1?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -41,7 +41,7 @@ spring:
 # Redis数据库索引（默认为0）
   redis:
     database: 0
-    host: 192.168.25.30
+    host: 192.168.25.100
     port: 6379
     password: redis
     pool.max-active: 8
@@ -59,11 +59,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*.xml
-  #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.test.bean
-
+  
 #pagehelper分页插件
 pagehelper:
   helperDialect: mysql
@@ -74,4 +70,4 @@ pagehelper:
 logging:
   file: d:/springboot.log
   level:   
-    com.test.mapper: DEBUG
+    com.gufang.oa.mapper: DEBUG
